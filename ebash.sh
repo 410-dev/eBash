@@ -7,7 +7,6 @@ if [[ -f "$1" ]]; then
 	do
 		source "${DATAFILE}"
 	done <<< "$(ls -1 | grep ".ebbasesrc")"
-	cd ..
 	"$1"
 else
 	echo "File not found."
