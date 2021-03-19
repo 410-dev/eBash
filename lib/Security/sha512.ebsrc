@@ -1,0 +1,28 @@
+#!/bin/bash
+function Security.stringToSha512() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Security.stringToSha512 - Parameter is not properly given."
+		exit
+	else
+		export parse=($(echo "$1" | shasum -a 512))
+		echo "${parse[0]}"
+	fi
+}
+
+function Security.fileToSha512() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Security.fileToSha512 - Parameter is not properly given."
+		exit
+	else
+		if [[ -f "$1" ]]; then
+			export parse=($(shasum -a 512 "$1"))
+			echo "${parse[0]}"
+		else
+			echo "Runtime error in: Security.fileToSha512 - No such file"
+			exit
+		fi
+	fi
+}
+
+export -f Security.stringToSha512
+export -f Security.fileToSha512

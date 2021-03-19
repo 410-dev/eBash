@@ -1,0 +1,10 @@
+#!/bin/bash
+function isEmpty() {
+	export testfor="$1"
+	if [[ -z "$testfor" ]]; then
+		echo "true"
+	fi
+	unset testfor
+}
+
+export -f isEmpty

@@ -1,0 +1,15 @@
+#!/bin/bash
+function input() {
+	read return
+	echo "$return"
+}
+
+function secureInput() {
+	read -s return
+	export return="$(md5 -qs "$return")"
+	echo "$return"
+	unset return
+}
+
+export -f input
+export -f secureInput

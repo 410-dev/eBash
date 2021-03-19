@@ -1,0 +1,12 @@
+#!/bin/bash
+function Files.list() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.list - Parameter not properly given."
+		exit
+	else
+		export parameter="-1$2"
+		ls "$parameter" "$1"
+	fi
+}
+
+export -f Files.list

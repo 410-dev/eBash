@@ -1,0 +1,35 @@
+#!/bin/bash
+function Application.setData() {
+	if [[ -z "$APPLICATION_CONTEXT" ]]; then
+		echo "Syntax error in: Application.setData - Context not given."
+		exit
+	else
+		if [[ -z "$1" ]] || [[ -z "$2" ]]; then
+			echo "Syntax error in: Application.setData - Either key or / and value is not given."
+		else
+			mkdir -p ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults
+			echo "$2" > ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
+		fi
+	fi
+}
+
+function Application.getData() {
+	if [[ -z "$APPLICATION_CONTEXT" ]]; then
+		echo "Syntax error in: Application.setData - Context not given."
+		exit
+	else
+		if [[ -z "$1" ]]; then
+			echo "Syntax error in: Application.getData - Key is not given."
+		else
+			if [[ -f ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")" ]]; then
+				cat ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
+			else
+				echo "Runtime error in: Application.getData - Key does not exist."
+				exit
+			fi
+		fi
+	fi
+}
+
+export -f Application.setData
+export -f Application.getData

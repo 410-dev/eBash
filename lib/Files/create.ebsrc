@@ -1,0 +1,33 @@
+#!/bin/bash
+function Files.createFile() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.createFile - Parameter is not properly given."
+		exit
+	else
+		if [[ -f "$1" ]]; then
+			echo "Runtime error in: Files.createFile - File already exists."
+			exit
+		else
+			echo "$2" > "$1"
+		fi
+	fi
+}
+
+function Files.createDirectory() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.createDirectory - Parameter is not properly given."
+		exit
+	else
+		if [[ -f "$1" ]]; then
+			echo "Runtime error in: Files.createDirectory - Directory already exists."
+			exit
+		else
+			export param="-p$2"
+			mkdir $param "$1"
+			unset param
+		fi
+	fi
+}
+
+export -f Files.createFile
+export -f Files.createDirectory

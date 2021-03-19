@@ -1,0 +1,31 @@
+#!/bin/bash
+function Files.removeFile() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.removeFile - Parameter is not properly given."
+		exit
+	else
+		if [[ ! -f "$1" ]]; then
+			echo "Runtime error in: Files.removeFile - File does not exist."
+			exit
+		else
+			rm -f "$1"
+		fi
+	fi
+}
+
+function Files.removeDirectory() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.removeDirectory - Parameter is not properly given."
+		exit
+	else
+		if [[ ! -d "$1" ]]; then
+			echo "Runtime error in: Files.removeDirectory - Directory does not exist."
+			exit
+		else
+			rm -rf "$1"
+		fi
+	fi
+}
+
+export -f Files.removeFile
+export -f Files.removeDirectory

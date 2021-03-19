@@ -1,0 +1,16 @@
+#!/bin/bash
+function Files.readStringData() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Files.readStringData - Parameter is not properly given."
+		exit
+	else
+		if [[ ! -f "$1" ]]; then
+			echo "Runtime error in: Files.readStringData - File does not exist."
+			exit
+		else
+			cat "$1"
+		fi
+	fi
+}
+
+export -f Files.readStringData

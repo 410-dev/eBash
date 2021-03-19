@@ -1,0 +1,26 @@
+#!/bin/bash
+function Security.stringToMD5() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Security.stringToMD5 - Parameter is not properly given."
+		exit
+	else
+		md5 -qs "$1"
+	fi
+}
+
+function Security.fileToMD5() {
+	if [[ -z "$1" ]]; then
+		echo "SSyntax error in: Security.fileToMD5 - Parameter is not properly given."
+		exit
+	else
+		if [[ -f "$1" ]]; then 
+			md5 -q "$1"
+		else
+			echo "Runtime error in: Security.fileToMD5 - No such file"
+			exit
+		fi
+	fi
+}
+
+export -f Security.stringToMD5
+export -f Security.fileToMD5

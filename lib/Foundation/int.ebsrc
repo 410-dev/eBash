@@ -1,0 +1,40 @@
+#!/bin/bash
+function int() {
+	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
+		echo "Syntax error in: Integer declaration"
+		exit
+	else
+		export $1=$2
+		declare -i $1
+	fi
+}
+
+function isFrontGreater() {
+	if [[ $1 -gt $2 ]]; then
+		echo "true"
+	fi
+}
+
+function isBackGreater() {
+	if [[ $2 -gt $1 ]]; then
+		echo "true"
+	fi
+}
+
+function isFrontLesser() {
+	if [[ $1 -lt $2 ]]; then
+		echo "true"
+	fi
+}
+
+function isBackLesser() {
+	if [[ $2 -lt $1 ]]; then
+		echo "true"
+	fi
+}
+
+export -f int
+export -f isFrontLesser
+export -f isFrontGreater
+export -f isBackLesser
+export -f isBackGreater

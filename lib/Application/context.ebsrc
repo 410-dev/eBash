@@ -1,0 +1,10 @@
+#!/bin/bash
+function Application.setContext() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Application.setContext"
+	else
+		export APPLICATION_CONTEXT="$1"
+	fi
+}
+
+export -f Application.setContext
