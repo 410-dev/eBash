@@ -116,6 +116,9 @@ Layout:
       - Hashes given string to MD5.
     - (hashed string) Security.fileToMD5 {File path}
       - Hashes given file to MD5.
+  - privilege
+    - (void) Security.elevatePrivilege
+      - Gain root permission until program ends
   - sha512
     - (hashed string) Security.stringToSha512 {String to hash}
       - Hashes given string to SHA 512.
