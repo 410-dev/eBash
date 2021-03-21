@@ -32,7 +32,6 @@ Layout:
   - (Module name)
     - (Return type) (Function)
       - (Description)
-
 - Application
   - context
     - Application.setContext {context}
@@ -105,6 +104,12 @@ Layout:
   - string
     - (boolean) isNull {variable}
       - Checks whether the variable is empty or not.
+- Network
+  - get
+    - (string) Network.getHTML {URL}
+      - Downloads HTML, then returns as string.
+    - (void) Network.saveDocument {URL} {File save path}
+      - Downloads a file or HTML document, then saves at specified path.
 - Security
   - md5
     - (hased string) Security.stringToMD5 {String to hash}
