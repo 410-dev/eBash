@@ -116,3 +116,15 @@ Layout:
       - Hashes given string to SHA 512.
     - (hashed string) Security.fileToSha512 {File path}
       - Hashes given file to SHA 512.
+- (Root)
+  - QSyntax
+    - (void) create
+      - create directory at {parent directory} name {directory name}
+        - Creates a directory
+      - create file at {parent directory} name {file name} [with content of {content}]
+        - Creates file with content if content is given as string.
+    - (void) remove
+      - remove directory at {directory path}
+        - Remove a directory
+      - remove file at {file path}
+        - Remove a file

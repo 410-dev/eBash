@@ -1,0 +1,132 @@
+#!/bin/bash
+@import Files/check
+@import Files/remove
+@import Files/create
+@import Foundation/string
+@import Foundation/out
+
+function create() {
+	if [[ $(isNull "$1") ]]; then
+		println "Syntax error in: (QSyntax)create - type not given."
+		exit
+	fi
+	if [[ $(isNull "$2") ]]; then
+		println "Syntax error in: (QSyntax)create - specification keywork not given."
+		exit
+	fi
+	if [[ $(isNull "$3") ]]; then
+		println "Syntax error in: (QSyntax)create - path not given."
+		exit
+	fi
+	if  [[ $(isNull "$4") ]]; then
+		println "Syntax error in: (QSyntax)create - specification keywork not given."
+		exit
+	fi
+	if  [[ $(isNull "$5") ]]; then
+		println "Syntax error in: (QSyntax)create - name not given."
+		exit
+	fi
+
+
+	if [[ "$1" == "directory" ]]; then
+		if [[ $(Files.isFile "$3") ]]; then
+			println "Runtime error in: (QSyntax)create directory - given path is not directory."
+			exit
+		elif [[ $(Files.isDirectory "$3/$5") ]]; then
+			println "Runtime error in: (QSyntax)create directory - directory already exists in the given path."
+			exit
+		else
+			Files.createDirectory "$3/$5"
+			if [[ ! $(Files.isDirectory "$3/$5") ]]; then
+				println "Runtime error in: (QSyntax)create directory - failed creating a directory."
+				exit
+			fi
+		fi
+	elif [[ "$1" == "file" ]]; then
+		if [[ $(Files.isFile "$3") ]]; then
+			println "Runtime error in: (QSyntax)create file - given path is not directory."
+			exit
+		elif [[ $(Files.isFile "$3/$5") ]]; then
+			println "Runtime error in: (QSyntax)create file - file already exists in the given path."
+			exit
+		else
+			if [[ $(isNull "$6") ]]; then
+				Files.createFile "$3/$5"
+				if [[ ! $(Files.isFile "$3/$5") ]]; then
+					println "Runtime error in: (QSyntax)create file - failed creating a file."
+					exit
+				fi
+			else
+				if [[ "$6" == "with" ]] && [[ "$7" == "content" ]] && [[ "$8" == "of" ]] && [[ ! $(isNull "$9") ]]; then
+					Files.createFile "$3/$5" "$9"
+					if [[ ! $(Files.isFile "$3/$5") ]]; then
+						println "Runtime error in: (QSyntax)create file - failed creating a file."
+						exit
+					fi
+				else
+					println "Syntax error in: (QSyntax)create - specification keywork not given, or incorrect."
+					exit
+				fi
+			fi
+		fi
+	else
+		println "Syntax error in: (QSyntax)create - unsupported create type: $1"
+		exit
+	fi
+}
+
+function remove() {
+	if [[ $(isNull "$1") ]]; then
+		println "Syntax error in: (QSyntax)remove - type not given."
+		exit
+	fi
+	if [[ $(isNull "$2") ]]; then
+		println "Syntax error in: (QSyntax)remove - specification keywork not given."
+		exit
+	fi
+	if [[ $(isNull "$3") ]]; then
+		println "Syntax error in: (QSyntax)remove - path not given."
+		exit
+	fi
+
+	if [[ "$1" == "directory" ]]; then
+		if [[ ! $(Files.isDirectory "$3") ]]; then
+			println "Runtime error in: (QSyntax)remove directory - given path is not directory, or does not exist."
+			exit
+		else
+			Files.removeDirectory "$3"
+			if [[ $(Files.isDirectory "$3") ]]; then
+				println "Runtime error in: (QSyntax)remove directory - failed removing the directory."
+				exit
+			fi
+		fi
+	elif [[ "$1" == "file" ]]; then
+		if [[ ! $(Files.isFile "$3") ]]; then
+			println "Runtime error in: (QSyntax)remove file - given path is not file, or does not exist."
+			exit
+		else
+			Files.removeFile "$3"
+			if [[ $(Files.isFile "$3") ]]; then
+				println "Runtime error in: (QSyntax)remove file - failed removing the file."
+				exit
+			fi
+		fi
+	elif [[ "$1" == "anything" ]]; then
+		if [[ ! $(Files.exists "$3") ]]; then
+			println "Runtime error in: (QSyntax)remove anything - given path does not exist."
+			exit
+		else
+			Files.removeDirectory "$3"
+			if [[ $(Files.exists "$3") ]]; then
+				println "Runtime error in: (QSyntax)remove anything - failed removing."
+				exit
+			fi
+		fi
+	else
+		println "Syntax error in: (QSyntax)remove - unsupported remove type: $1"
+		exit
+	fi
+}
+
+export -f create
+export -f remove
