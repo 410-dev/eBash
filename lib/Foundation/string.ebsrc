@@ -7,4 +7,13 @@ function isNull() {
 	unset testfor
 }
 
+function replaceStringOccurrences() {
+	if [[ -z "$1" ]] && [[ -z "$2" ]] && [[ -z "$3" ]]; then
+		echo "Syntax Error in: replaceStringOccurrences - Not enough parameters given."
+		exit
+	fi
+	echo "$1" | sed "s/$2/$3/g"
+}
+
 export -f isNull
+export -f replaceStringOccurrences

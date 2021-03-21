@@ -4,6 +4,20 @@
 
 -----
 
+Bash made easier.
+
+Just one line to do a complex task.
+
+
+
+
+
+
+
+## Language documentation
+
+---------
+
 ### Legends
 
 - {}: Required Parameter
@@ -104,6 +118,9 @@ Layout:
   - string
     - (boolean) isNull {variable}
       - Checks whether the variable is empty or not.
+    - (string) replaceStringOccurrences {Target string} {String to replace} {Replace with}
+      - Replace string of {String to Replace} in {Target string} with {Repace with string}.
+      - If you want to replace /, then you must escape / using \ 
 - Network
   - get
     - (string) Network.getHTML {URL}
