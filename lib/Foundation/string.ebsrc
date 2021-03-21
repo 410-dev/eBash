@@ -1,5 +1,5 @@
 #!/bin/bash
-function isEmpty() {
+function isNull() {
 	export testfor="$1"
 	if [[ -z "$testfor" ]]; then
 		echo "true"
@@ -7,4 +7,4 @@ function isEmpty() {
 	unset testfor
 }
 
-export -f isEmpty
+export -f isNull

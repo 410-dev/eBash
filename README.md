@@ -103,7 +103,7 @@ Layout:
     - (void) println [content]
       - Prints text to screen, with linebreaking.
   - string
-    - (boolean) isEmpty {variable}
+    - (boolean) isNull {variable}
       - Checks whether the variable is empty or not.
 - Security
   - md5
