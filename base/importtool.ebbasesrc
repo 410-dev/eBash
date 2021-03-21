@@ -2,7 +2,7 @@
 function @import() {
 	if [[ ! -z "$1" ]]; then
 		if [[ -f "${EBHOME}/lib/$1.ebsrc" ]]; then
-			source "$(dirname "$0")/lib/$1.ebsrc"
+			source "${EBHOME}/lib/$1.ebsrc"
 		elif [[ -d "${EBHOME}/lib/$1" ]]; then
 			export WORKSPACE="$PWD"
 			cd "${EBHOME}/lib/$1"
