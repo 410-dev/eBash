@@ -1,0 +1,27 @@
+#!/bin/bash
+function Network.getHTML() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Network.getHTML - URL not passed correctly."
+		exit
+	fi
+	curl -Ls "$1"
+}
+
+function Network.saveDocument() {
+	if [[ -z "$1" ]]; then
+		echo "Syntax error in: Network.saveDocument - URL not passed correctly."
+		exit
+	fi
+	if [[ -z "$2" ]]; then
+		echo "Syntax error in: Network.saveDocument - Save point not passed correctly."
+		exit
+	fi
+	if [[ -f "$1" ]]; then
+		echo "Runtime error in: Network.saveDocument - File already exists in save point."
+		exit
+	fi
+	curl -Ls "$1" -o "$2"
+}
+
+export -f Network.getHTML
+export -f Network.saveDocument
