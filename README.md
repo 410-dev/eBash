@@ -6,13 +6,24 @@
 
 Bash made easier.
 
-Just one line to do a complex task.
+eBash is a library that is purely written in bash.
+The purpose of this library is to help bash developers to make the shell scripts more quickly.
+Keywords are instinctly familiar, and mutli-step actions can be done in one line.
 
+Tested environment: 
+OS - macOS Big Sur (11.2.3)
+Bash - GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin20)
 
+## Installation
 
+-----------
 
+Copy the entire eBash library to /Library .
+EBHome (eBash Home) should be /Library/eBash.
 
+To make default terminal as eBash interpreter, then append the following code to the shell profile such as bash_profile.
 
+```source /Library/eBash/linker```
 
 ## Language documentation
 
