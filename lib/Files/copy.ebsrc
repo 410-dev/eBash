@@ -1,37 +1,41 @@
 #!/bin/bash
+@import Foundation/string
+@import Foundation/out
+@import Files/check
+
 function Files.copyFile() {
-	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-		echo "Syntax error in: Files.copyFile - Parameters are not properly given."
+	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
+		println "Syntax error in: Files.copyFile - Parameters are not properly given."
 		exit
 	else
-		if [[ -f "$1" ]]; then
-			if [[ -d "$2" ]]; then
-				cp "$1" "$2"
+		if [[ $(Files.isFile "$1") ]]; then
+			if [[ $(Files.isDirectory "$2") ]]; then
+				cp "$3" "$1" "$2"
 			else
-				echo "Runtime error in: Files.copyFile - No such directory."
+				println "Runtime error in: Files.copyFile - No such directory."
 				exit
 			fi
 		else
-			echo "Runtime error in: Files.copyFile - No such file."
+			println "Runtime error in: Files.copyFile - No such file."
 			exit
 		fi
 	fi
 }
 
 function Files.copyDirectory() {
-	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-		echo "Syntax error in: Files.copyDirectory - Parameters are not properly given."
+	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
+		println "Syntax error in: Files.copyDirectory - Parameters are not properly given."
 		exit
 	else
-		if [[ -d "$1" ]]; then
-			if [[ -d "$2" ]]; then
+		if [[ $(Files.isDirectory "$1") ]]; then
+			if [[ $(Files.isDirectory "$2") ]]; then
 				cp -r "$1" "$2"
 			else
-				echo "Runtime error in: Files.copyDirectory - No such directory. (Destination)"
+				println "Runtime error in: Files.copyDirectory - No such directory. (Destination)"
 				exit
 			fi
 		else
-			echo "Runtime error in: Files.copyDirectory - No such directory. (Source)"
+			println "Runtime error in: Files.copyDirectory - No such directory. (Source)"
 			exit
 		fi
 	fi

@@ -1,10 +1,13 @@
 #!/bin/bash
+@import Foundation/string
+@import Foundation/out
+
 function Files.removeFile() {
-	if [[ -z "$1" ]]; then
+	if [[ $(isNull "$1") ]]; then
 		echo "Syntax error in: Files.removeFile - Parameter is not properly given."
 		exit
 	else
-		if [[ ! -f "$1" ]]; then
+		if [[ ! $(Files.isFile "$1") ]]; then
 			echo "Runtime error in: Files.removeFile - File does not exist."
 			exit
 		else
@@ -14,11 +17,11 @@ function Files.removeFile() {
 }
 
 function Files.removeDirectory() {
-	if [[ -z "$1" ]]; then
+	if [[ $(isNull "$1") ]]; then
 		echo "Syntax error in: Files.removeDirectory - Parameter is not properly given."
 		exit
 	else
-		if [[ ! -d "$1" ]]; then
+		if [[ ! $(Files.isDirectory "$1") ]]; then
 			echo "Runtime error in: Files.removeDirectory - Directory does not exist."
 			exit
 		else
@@ -28,11 +31,11 @@ function Files.removeDirectory() {
 }
 
 function Files.remove() {
-	if [[ -z "$1" ]]; then
+	if [[ $(isNull "$1") ]]; then
 		echo "Syntax error in: Files.remove - Parameter is not properly given."
 		exit
 	else
-		if [[ ! -e "$1" ]]; then
+		if [[ ! $(Files.exists "$1") ]]; then
 			echo "Runtime error in: Files.remove - Nothing exists."
 			exit
 		else

@@ -1,11 +1,15 @@
 #!/bin/bash
+@import Foundation/string
+@import Foundation/out
+@import Files/check
+
 function Files.setHidden() {
-	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-		echo "Syntax error in: Files.setHidden - Parameters are not properly given."
+	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
+		println "Syntax error in: Files.setHidden - Parameters are not properly given."
 		exit
 	else
-		if [[ -e "$2" ]]; then
-			echo "Runtime error in: Files.setHidden - No such file or directory."
+		if [[ $(Files.exists "$2") ]]; then
+			println "Runtime error in: Files.setHidden - No such file or directory."
 			exit
 		fi
 		if [[ "$1" == "true" ]]; then
@@ -13,22 +17,22 @@ function Files.setHidden() {
 		elif [[ "$1" == "false" ]]; then
 			chflags nohidden "$2"
 		else
-			echo "Runtime error in: Files.setHidden - Value is not given as boolean format."
+			println "Runtime error in: Files.setHidden - Value is not given as boolean format."
 			exit
 		fi
 	fi
 }
 
 function Files.relocate() {
-	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-		echo "Syntax error in: Files.relocate - Parameters are not properly given."
+	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
+		println "Syntax error in: Files.relocate - Parameters are not properly given."
 		exit
 	else
-		if [[ -e "$2" ]]; then
-			echo "Runtime error in: Files.relocate - There is already a file with the same name as destination."
+		if [[ $(Files.exists "$2") ]]; then
+			println "Runtime error in: Files.relocate - There is already a file with the same name as destination."
 			exit
-		elif [[ ! -e "$1" ]]; then
-			echo "Runtime error in: Files.relocate - No such file or directory."
+		elif [[ ! $(Files.exists "$1") ]]; then
+			println "Runtime error in: Files.relocate - No such file or directory."
 			exit
 		else
 			mv "$1" "$2"

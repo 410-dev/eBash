@@ -1,11 +1,13 @@
 #!/bin/bash
+@import Foundation/string
+@import Foundation/out
+
 function Files.list() {
-	if [[ -z "$1" ]]; then
-		echo "Syntax error in: Files.list - Parameter not properly given."
+	if [[ $(isNull "$1") ]]; then
+		println "Syntax error in: Files.list - Parameter not properly given."
 		exit
 	else
-		export parameter="-1$2"
-		ls "$parameter" "$1"
+		ls "-1$2" "$1"
 	fi
 }
 

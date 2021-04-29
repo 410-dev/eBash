@@ -1,30 +1,35 @@
 #!/bin/bash
+@import Files
+
 function Application.setData() {
-	if [[ -z "$APPLICATION_CONTEXT" ]]; then
-		echo "Syntax error in: Application.setData - Context not given."
+	if [[ $(isNull "$APPLICATION_CONTEXT") ]]; then
+		println "Syntax error in: Application.setData - Context not given."
 		exit
 	else
-		if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-			echo "Syntax error in: Application.setData - Either key or / and value is not given."
+		if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
+			println "Syntax error in: Application.setData - Either key or / and value is not given."
 		else
-			mkdir -p ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults
-			echo "$2" > ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
+			Files.createDirectory ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults
+			if [[ $(Files.exists ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")") ]]; then
+				Files.remove ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
+			fi
+			Files.createFile ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")" "$2"
 		fi
 	fi
 }
 
 function Application.getData() {
-	if [[ -z "$APPLICATION_CONTEXT" ]]; then
-		echo "Syntax error in: Application.setData - Context not given."
+	if [[ $(isNull "$APPLICATION_CONTEXT") ]]; then
+		println "Syntax error in: Application.setData - Context not given."
 		exit
 	else
-		if [[ -z "$1" ]]; then
-			echo "Syntax error in: Application.getData - Key is not given."
+		if [[ $(isNull "$1") ]]; then
+			println "Syntax error in: Application.getData - Key is not given."
 		else
-			if [[ -f ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")" ]]; then
-				cat ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
+			if [[ $(Files.isFile ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")") ]]; then
+				Files.read ~/Library/Application\ Support/"$APPLICATION_CONTEXT"/defaults/"$(md5 -qs "$1")"
 			else
-				echo "Runtime error in: Application.getData - Key does not exist."
+				println "Runtime error in: Application.getData - Key does not exist."
 				exit
 			fi
 		fi

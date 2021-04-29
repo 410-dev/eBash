@@ -1,7 +1,10 @@
 #!/bin/bash
+@import Foundation/string
+@import Foundation/out
+
 function Security.stringToMD5() {
-	if [[ -z "$1" ]]; then
-		echo "Syntax error in: Security.stringToMD5 - Parameter is not properly given."
+	if [[ $(isNull "$1") ]]; then
+		println "Syntax error in: Security.stringToMD5 - Parameter is not properly given."
 		exit
 	else
 		md5 -qs "$1"
@@ -9,14 +12,14 @@ function Security.stringToMD5() {
 }
 
 function Security.fileToMD5() {
-	if [[ -z "$1" ]]; then
-		echo "SSyntax error in: Security.fileToMD5 - Parameter is not properly given."
+	if [[ $(isNull "$1") ]]; then
+		println "Syntax error in: Security.fileToMD5 - Parameter is not properly given."
 		exit
 	else
-		if [[ -f "$1" ]]; then 
+		if [[ $(Files.isFile "$1") ]]; then 
 			md5 -q "$1"
 		else
-			echo "Runtime error in: Security.fileToMD5 - No such file"
+			println "Runtime error in: Security.fileToMD5 - No such file"
 			exit
 		fi
 	fi

@@ -6,8 +6,8 @@ function input() {
 
 function secureInput() {
 	read -s return
-	export return="$(md5 -qs "$return")"
-	echo "$return"
+	export parse=($(echo "$return" | shasum -a 512))
+	echo "${parse[0]}"
 	unset return
 }
 
