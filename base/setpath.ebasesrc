@@ -5,12 +5,14 @@ function @setWorkingDirectoryInAbsolute() {
 			export EBWorkSpace="$1"
 			cd "$EBWorkSpace"
 		else
-			echo "Error at @setWorkingDirectoryInAbsolute: Directory \"$1\" not found"
-			exit
+			export _EBASH_EXCEPTION="@setWorkingDirectoryInAbsolute: Directory \"$1\" not found"
+			export _EBASH_EXCPETION_TYPE="Runtime"
+			@exception_
 		fi
 	else
-		echo "Error at @setWorkingDirectoryInAbsolute: Missing target"
-		exit
+		export _EBASH_EXCEPTION="@setWorkingDirectoryInAbsolute: Missing target"
+		export _EBASH_EXCPETION_TYPE="Runtime"
+		@exception_
 	fi
 }
 
@@ -20,12 +22,14 @@ function @setWorkingDirectoryInRelative() {
 			cd "$PWD/$1"
 			export EBWorkSpace="$(pwd)"
 		else
-			echo "Error at @setWorkingDirectoryInRelative: Directory \"$1\" not found"
-			exit
+			export _EBASH_EXCEPTION="@setWorkingDirectoryInRelative: Directory \"$1\" not found"
+			export _EBASH_EXCPETION_TYPE="Runtime"
+			@exception_
 		fi
 	else
-		echo "Error at @setWorkingDirectoryInRelative: Missing target"
-		exit
+		export _EBASH_EXCEPTION="@setWorkingDirectoryInRelative: Missing target"
+		export _EBASH_EXCPETION_TYPE="Runtime"
+		@exception_
 	fi
 }
 

@@ -1,7 +1,10 @@
 #!/bin/bash
+@import Foundation/exception
+@import Foundation/string
+
 function Application.setContext() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Application.setContext"
+		syntaxException "Application.setContext"
 	else
 		export APPLICATION_CONTEXT="$1"
 	fi

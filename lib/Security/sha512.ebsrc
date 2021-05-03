@@ -1,11 +1,10 @@
 #!/bin/bash
+@import Foundation/exception
 @import Foundation/string
-@import Foundation/out
 
 function Security.stringToSha512() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Security.stringToSha512 - Parameter is not properly given."
-		exit
+		syntaxException "Security.stringToSha512 - Parameter is not properly given."
 	else
 		export parse=($(echo "$1" | shasum -a 512))
 		echo "${parse[0]}"
@@ -14,15 +13,13 @@ function Security.stringToSha512() {
 
 function Security.fileToSha512() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Security.fileToSha512 - Parameter is not properly given."
-		exit
+		syntaxException "Security.fileToSha512 - Parameter is not properly given."
 	else
 		if [[ $(Files.isFile "$1") ]]; then
 			export parse=($(shasum -a 512 "$1"))
 			echo "${parse[0]}"
 		else
-			println "Runtime error in: Security.fileToSha512 - No such file"
-			exit
+			runtimeException "Security.fileToSha512 - No such file"
 		fi
 	fi
 }

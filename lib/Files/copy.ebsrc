@@ -1,42 +1,36 @@
 #!/bin/bash
 @import Foundation/string
-@import Foundation/out
+@import Foundation/exception
 @import Files/check
 
 function Files.copyFile() {
 	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
-		println "Syntax error in: Files.copyFile - Parameters are not properly given."
-		exit
+		syntaxException "Files.copyFile - Parameters are not properly given."
 	else
 		if [[ $(Files.isFile "$1") ]]; then
 			if [[ $(Files.isDirectory "$2") ]]; then
 				cp "$3" "$1" "$2"
 			else
-				println "Runtime error in: Files.copyFile - No such directory."
-				exit
+				runtimeException "Files.copyFile - No such directory."
 			fi
 		else
-			println "Runtime error in: Files.copyFile - No such file."
-			exit
+			runtimeException "Files.copyFile - No such file."
 		fi
 	fi
 }
 
 function Files.copyDirectory() {
 	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
-		println "Syntax error in: Files.copyDirectory - Parameters are not properly given."
-		exit
+		syntaxException "Files.copyDirectory - Parameters are not properly given."
 	else
 		if [[ $(Files.isDirectory "$1") ]]; then
 			if [[ $(Files.isDirectory "$2") ]]; then
 				cp -r "$1" "$2"
 			else
-				println "Runtime error in: Files.copyDirectory - No such directory. (Destination)"
-				exit
+				runtimeException "Files.copyDirectory - No such directory. (Destination)"
 			fi
 		else
-			println "Runtime error in: Files.copyDirectory - No such directory. (Source)"
-			exit
+			runtimeException "Files.copyDirectory - No such directory. (Source)"
 		fi
 	fi
 }

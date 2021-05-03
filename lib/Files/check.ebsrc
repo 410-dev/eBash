@@ -1,11 +1,10 @@
 #!/bin/bash
+@import Foundation/exception
 @import Foundation/string
-@import Foundation/out
 
 function Files.exists() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Files.exists - Parameter is not properly given."
-		exit
+		syntaxException "Files.exists - Parameter is not properly given."
 	else
 		if [[ -e "$1" ]]; then
 			echo "true"
@@ -15,8 +14,7 @@ function Files.exists() {
 
 function Files.isDirectory() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Files.isDirectory - Parameter is not properly given."
-		exit
+		syntaxException "Files.isDirectory - Parameter is not properly given."
 	else
 		if [[ -d "$1" ]]; then
 			echo "true"
@@ -26,8 +24,7 @@ function Files.isDirectory() {
 
 function Files.isFile() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Files.isFile - Parameter is not properly given."
-		exit
+		syntaxException "Files.isFile - Parameter is not properly given."
 	else
 		if [[ -f "$1" ]]; then
 			echo "true"

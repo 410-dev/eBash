@@ -1,39 +1,33 @@
 #!/bin/bash
+@import Foundation/exception
 @import Foundation/string
-@import Foundation/out
 @import Files/check
 
 function Files.setHidden() {
 	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
-		println "Syntax error in: Files.setHidden - Parameters are not properly given."
-		exit
+		syntaxException "Files.setHidden - Parameters are not properly given."
 	else
 		if [[ $(Files.exists "$2") ]]; then
-			println "Runtime error in: Files.setHidden - No such file or directory."
-			exit
+			runtimeException "Files.setHidden - No such file or directory."
 		fi
 		if [[ "$1" == "true" ]]; then
 			chflags hidden "$2"
 		elif [[ "$1" == "false" ]]; then
 			chflags nohidden "$2"
 		else
-			println "Runtime error in: Files.setHidden - Value is not given as boolean format."
-			exit
+			runtimeException "Files.setHidden - Value is not given as boolean format."
 		fi
 	fi
 }
 
 function Files.relocate() {
 	if [[ $(isNull "$1") ]] || [[ $(isNull "$2") ]]; then
-		println "Syntax error in: Files.relocate - Parameters are not properly given."
-		exit
+		syntaxException "Files.relocate - Parameters are not properly given."
 	else
 		if [[ $(Files.exists "$2") ]]; then
-			println "Runtime error in: Files.relocate - There is already a file with the same name as destination."
-			exit
+			runtimeException "Files.relocate - There is already a file with the same name as destination."
 		elif [[ ! $(Files.exists "$1") ]]; then
-			println "Runtime error in: Files.relocate - No such file or directory."
-			exit
+			runtimeException "Files.relocate - No such file or directory."
 		else
 			mv "$1" "$2"
 		fi

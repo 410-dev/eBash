@@ -1,15 +1,14 @@
 #!/bin/bash
+@import Foundation/exception
 @import Foundation/string
-@import Foundation/out
+@import Files/check
 
 function Files.readStringData() {
 	if [[ $(isNull "$1") ]]; then
-		println "Syntax error in: Files.readStringData - Parameter is not properly given."
-		exit
+		syntaxException "Files.readStringData - Parameter is not properly given."
 	else
 		if [[ ! $(Files.isFile "$2") ]]; then
-			println "Runtime error in: Files.readStringData - File does not exist."
-			exit
+			runtimeException "Files.readStringData - File does not exist."
 		else
 			cat "$1"
 		fi

@@ -1,8 +1,9 @@
 #!/bin/bash
 function int() {
 	if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-		echo "Syntax error in: Integer declaration"
-		exit
+		export _EBASH_EXCEPTION="Integer declaration"
+		export _EBASH_EXCPETION_TYPE="Syntax"
+		@exception_
 	else
 		export $1=$2
 		declare -i $1

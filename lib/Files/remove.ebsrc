@@ -1,15 +1,15 @@
 #!/bin/bash
+@import Foundation/exception
 @import Foundation/string
 @import Foundation/out
+@import Files/check
 
 function Files.removeFile() {
 	if [[ $(isNull "$1") ]]; then
-		echo "Syntax error in: Files.removeFile - Parameter is not properly given."
-		exit
+		syntaxException "Files.removeFile - Parameter is not properly given."
 	else
 		if [[ ! $(Files.isFile "$1") ]]; then
-			echo "Runtime error in: Files.removeFile - File does not exist."
-			exit
+			runtimeException "Files.removeFile - File does not exist."
 		else
 			rm -f "$1"
 		fi
@@ -18,12 +18,10 @@ function Files.removeFile() {
 
 function Files.removeDirectory() {
 	if [[ $(isNull "$1") ]]; then
-		echo "Syntax error in: Files.removeDirectory - Parameter is not properly given."
-		exit
+		syntaxException "Files.removeDirectory - Parameter is not properly given."
 	else
 		if [[ ! $(Files.isDirectory "$1") ]]; then
-			echo "Runtime error in: Files.removeDirectory - Directory does not exist."
-			exit
+			runtimeException "Files.removeDirectory - Directory does not exist."
 		else
 			rm -rf "$1"
 		fi
@@ -32,11 +30,10 @@ function Files.removeDirectory() {
 
 function Files.remove() {
 	if [[ $(isNull "$1") ]]; then
-		echo "Syntax error in: Files.remove - Parameter is not properly given."
-		exit
+		syntaxException "Files.remove - Parameter is not properly given."
 	else
 		if [[ ! $(Files.exists "$1") ]]; then
-			echo "Runtime error in: Files.remove - Nothing exists."
+			runtimeException "Files.remove - Nothing exists."
 			exit
 		else
 			rm -rf "$1"
