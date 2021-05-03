@@ -116,6 +116,18 @@ Layout:
       - Returns user's input as MD5 hashed data.
       - The input field will be invisible.
   - int
+    - (int) add {variable 1} {variable 2} [saving variable]
+      - Add variable 1 and 2.
+      - Saves the result at saving variable if given.
+    - (int) subtract {variable 1} {variable 2} [saving variable]
+      - Subtract variable 2 from 1.
+      - Saves the result at saving variable if given.
+    - (int) multiply {variable 1} {variable 2} [saving variable]
+      - Multiply variable 1 and 2.
+      - Saves the result at saving variable if given.
+    - (int) divide {variable 1} {variable 2} [saving variable]
+      - Divide variable 1 by 2. (Var1 / var2)
+      - Saves the result at saving variable if given.
     - (void) int {variable name} {value}
       - Declares an integer value with given name.
     - (boolean) isFrontGreater {variable 1} {variable 2}
