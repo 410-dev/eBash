@@ -104,6 +104,11 @@ Layout:
     - (void) Files.removeDirectory {} [Optional parameter]
       - Removes the specified directory.
 - Foundation
+  - exception
+    - (void) syntaxException {Exception data (String)}
+      - Prints the exception data as syntax exception, then quit if running mode is @script.
+    - (void) runtimeException {Exception data (String)}
+      - Prints the exception data as runtime exception, then quit if running mode is @script.
   - in
     - (string) input
       - Returns user's input.
