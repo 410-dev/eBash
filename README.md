@@ -164,3 +164,11 @@ Layout:
         - Remove a directory
       - remove file at {file path}
         - Remove a file
+    - (void) runif
+      - runif directory "script"
+      - runif file "script"
+      - runif any "script"
+    - (void) runifnot
+      - runifnot directory "script"
+      - runifnot file "script"
+      - runifnot any "script"
