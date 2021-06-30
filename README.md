@@ -2,7 +2,6 @@
 
 ## Made Bash user friendly
 
------
 
 Bash made easier.
 
@@ -16,7 +15,6 @@ Bash - GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin20)
 
 ## Installation
 
------------
 
 Copy the entire eBash library to /Library .
 EBHome (eBash Home) should be /Library/eBash.
@@ -26,8 +24,6 @@ To make default terminal as eBash interpreter, then append the following code to
 ```source /Library/eBash/linker```
 
 ## Language documentation
-
----------
 
 ### Legends
 
@@ -46,6 +42,10 @@ To make default terminal as eBash interpreter, then append the following code to
   - Set current working directory with absolute path address
 - @setWorkingDirectoryInRelative {directory path}
   - Set current working directory with relative path address
+- @script
+  - Set running mode as bash script
+- @nscript
+  - Set endpoint of the bash script
 
 
 
