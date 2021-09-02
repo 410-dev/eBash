@@ -2,6 +2,7 @@
 
 ## Made Bash user friendly
 
+### This project is no longer maintained.
 
 Bash made easier.
 
